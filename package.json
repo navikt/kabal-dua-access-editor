@@ -1,0 +1,35 @@
+{
+  "name": "kabal-dua-access-editor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kabal - DUA tilgangsredigering",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc",
+    "lint": "biome check"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "2.1.4",
+    "@tailwindcss/postcss": "4.1.11",
+    "@types/bun": "1.2.20",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
+    "tailwindcss": "4.1.11",
+    "typescript": "next"
+  },
+  "dependencies": {
+    "@navikt/aksel-icons": "7.27.1",
+    "@navikt/ds-css": "7.27.1",
+    "@navikt/ds-react": "7.27.1",
+    "@navikt/ds-tailwind": "7.27.1",
+    "@wooorm/starry-night": "3.8.0",
+    "hast-util-to-jsx-runtime": "2.3.6",
+    "next": "15.4.6",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  }
+}
