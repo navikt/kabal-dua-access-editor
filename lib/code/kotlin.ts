@@ -112,6 +112,7 @@ const ACCESS_TO_EXCEPTION: Record<Access, Exception> = {
   [Access.ROL_REQUIRED]: Exception.MissingTilgangException,
   [Access.SENT_TO_MU]: Exception.MissingTilgangException,
   [Access.SENT_TO_ROL]: Exception.MissingTilgangException,
+  [Access.SENT_TO_MU_AND_ROL]: Exception.MissingTilgangException,
   [Access.ROL_USER]: Exception.MissingTilgangException,
   [Access.ROL_QUESTIONS]: Exception.DokumentValidationException,
   [Access.OTHERS_ATTACHMENTS]: Exception.MissingTilgangException,
