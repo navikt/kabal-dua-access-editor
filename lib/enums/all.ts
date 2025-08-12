@@ -1,12 +1,10 @@
 import type { RowUsecase } from '@/lib/data';
-import { Access } from '@/lib/enums/access';
 import { ACTION_VALUES } from '@/lib/enums/actions';
 import { CASE_STATUS_VALUES } from '@/lib/enums/case-status';
 import { CREATOR_VALUES } from '@/lib/enums/creator';
 import { DOCUMENT_TYPE_VALUES } from '@/lib/enums/document-type';
 import { PARENT_VALUES } from '@/lib/enums/parent';
 import { USER_VALUES } from '@/lib/enums/user';
-import { getInitialAccess } from '@/lib/initial-access';
 import { isValidCase } from '@/lib/is-valid-case';
 import { usecaseToKey } from '@/lib/usecase-key';
 
@@ -25,10 +23,7 @@ for (const user of USER_VALUES) {
             ALL_USECASES.push(usecase);
 
             for (const action of ACTION_VALUES) {
-              const initialAccess = getInitialAccess(action, usecase);
-              if (initialAccess !== Access.NOT_SUPPORTED) {
-                ALL_IDS.push(`${usecaseToKey(usecase)}-${action}`);
-              }
+              ALL_IDS.push(`${usecaseToKey(usecase)}-${action}`);
             }
           }
         }

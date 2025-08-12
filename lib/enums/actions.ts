@@ -22,7 +22,7 @@ export const isAction = (value: unknown): value is ActionEnum => ACTION_VALUES.i
 export const ACTION_NAMES: Record<ActionEnum, string> = {
   [ActionEnum.CREATE]: 'Opprette',
   [ActionEnum.WRITE]: 'Skrive i innholdet i',
-  [ActionEnum.REMOVE]: 'Fjerne',
+  [ActionEnum.REMOVE]: 'Slette/fjerne',
   [ActionEnum.CHANGE_TYPE]: 'Endre type på',
   [ActionEnum.RENAME]: 'Endre navn på',
   [ActionEnum.FINISH]: 'Arkivere / sende ut',

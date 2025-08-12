@@ -117,6 +117,10 @@ const ACCESS_COLORS: Partial<Record<Access, string>> = {
   [Access.ROL_USER]: ROL_COLOR_CLASS,
   [Access.NOT_ASSIGNED_ROL]: ROL_COLOR_CLASS,
   [Access.OTHERS_ATTACHMENTS]: 'text-ax-text-warning-decoration',
+  [Access.NOT_SUPPORTED]: 'text-ax-text-neutral-decoration',
+  [Access.NOT_ASSIGNED]: 'text-ax-text-accent-decoration',
+  [Access.NOT_ASSIGNED_OR_MEDUNDERSKRIVER]: 'text-ax-text-accent-decoration',
+  [Access.NOT_ASSIGNED_OR_ROL]: 'text-ax-text-accent-decoration',
 };
 
 const DEFAULT_ACCESS_COLOR_CLASS = 'text-ax-text-danger-decoration';
