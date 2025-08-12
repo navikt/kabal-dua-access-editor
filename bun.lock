@@ -4,10 +4,10 @@
     "": {
       "name": "kabal-dua-access-editor",
       "dependencies": {
-        "@navikt/aksel-icons": "7.27.1",
-        "@navikt/ds-css": "7.27.1",
-        "@navikt/ds-react": "7.27.1",
-        "@navikt/ds-tailwind": "7.27.1",
+        "@navikt/aksel-icons": "7.28.0",
+        "@navikt/ds-css": "7.28.0",
+        "@navikt/ds-react": "7.28.0",
+        "@navikt/ds-tailwind": "7.28.0",
         "@wooorm/starry-night": "3.8.0",
         "hast-util-to-jsx-runtime": "2.3.6",
         "next": "15.4.6",
@@ -116,15 +116,15 @@
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.28", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-KNNHHwW3EIp4EDYOvYFGyIFfx36R2dNJYH4knnZlF8T5jdbD5Wx8xmSaQ2gP9URkJ04LGEtlcCtwArKcmFcwKw=="],
 
-    "@navikt/aksel-icons": ["@navikt/aksel-icons@7.27.1", "https://npm.pkg.github.com/download/@navikt/aksel-icons/7.27.1/4ea08e7aefff24137cbbb6ad63173ffae1916036", {}, "sha512-XfV2hqkwcAe3b+tPSrt1aLJH19SOLUyvJ5QaMPs3HzcA/lPztcoyc3R+w9Gz8fwJjCqopinvI2j2vkmUDrk55w=="],
+    "@navikt/aksel-icons": ["@navikt/aksel-icons@7.28.0", "https://npm.pkg.github.com/download/@navikt/aksel-icons/7.28.0/a5061ee5fadb1c6fec24968c9f9cb548137629a6", {}, "sha512-EnaeT+7X0bPgGJ4fL3Ylgm/Uruft7r8+ki0aiJXdQtauo9G2/CY4rBJ6A6kVctPZqitanoJxxl1QxPNAwGhwmg=="],
 
-    "@navikt/ds-css": ["@navikt/ds-css@7.27.1", "https://npm.pkg.github.com/download/@navikt/ds-css/7.27.1/727dc8480b1e4230c25d739f3f7a503018a05e77", {}, "sha512-jALDOt1ftEzWO6OK7yzt38aebKECIG1GMwuHUTgX05SRNejqz6j7y5v8WhHLMkxVHffivXkIIbAcKwHdP7pCOw=="],
+    "@navikt/ds-css": ["@navikt/ds-css@7.28.0", "https://npm.pkg.github.com/download/@navikt/ds-css/7.28.0/ad6813acddc8c7f47adf8ec76e1c763a7e1b51f3", {}, "sha512-tPAvUy/JBAvgVPjfqP9Pyc64V01ubQOuhJN//dIRA0AUWz+p/houWRLg1EyBo+GNrZAktQxnthy/k6m+Lw+fNQ=="],
 
-    "@navikt/ds-react": ["@navikt/ds-react@7.27.1", "https://npm.pkg.github.com/download/@navikt/ds-react/7.27.1/f70a62fe4eed94b7e2a82725abf3069ac613af17", { "dependencies": { "@floating-ui/react": "0.27.8", "@floating-ui/react-dom": "^2.0.9", "@navikt/aksel-icons": "^7.27.1", "@navikt/ds-tokens": "^7.27.1", "clsx": "^2.1.0", "date-fns": "^4.0.0", "react-day-picker": "9.7.0" }, "peerDependencies": { "@types/react": ">=17.0.30", "react": ">=17.0.0 || >19.0.0-rc" } }, "sha512-cNUC1xqUdgWOL3JcNZyy1z4LsJiN3i2DnVBEvJ5lLeJgrFd3OdYBwjLBNKFXndJw5efxiZHWPEbb7F9CG4m74A=="],
+    "@navikt/ds-react": ["@navikt/ds-react@7.28.0", "https://npm.pkg.github.com/download/@navikt/ds-react/7.28.0/1fe176dcac5cbe9036367ab31bd74627f4e1580f", { "dependencies": { "@floating-ui/react": "0.27.8", "@floating-ui/react-dom": "^2.0.9", "@navikt/aksel-icons": "^7.28.0", "@navikt/ds-tokens": "^7.28.0", "clsx": "^2.1.0", "date-fns": "^4.0.0", "react-day-picker": "9.7.0" }, "peerDependencies": { "@types/react": ">=17.0.30", "react": ">=17.0.0 || >19.0.0-rc" } }, "sha512-769kNe1QhSEtuVBzwya1f6e/pohibz+xE0avRItccWcPqOX8flBUFSZ7tqfCLtOZ+K5CeafdxNXRTjhhvJwjAw=="],
 
-    "@navikt/ds-tailwind": ["@navikt/ds-tailwind@7.27.1", "https://npm.pkg.github.com/download/@navikt/ds-tailwind/7.27.1/628726fa42d6ba34bed30035336be54fdd6b07fc", {}, "sha512-6gUf9RJKtjYA3tQYN/FVl4UaLnunGomv3fyZviHSxRhGMbQfdtwi6ZObZJoVfyYv4byiTav4/TU3FdIhX9DRRQ=="],
+    "@navikt/ds-tailwind": ["@navikt/ds-tailwind@7.28.0", "https://npm.pkg.github.com/download/@navikt/ds-tailwind/7.28.0/bf4052b145206f225d09dd8b3cf09dc81591927a", {}, "sha512-TWGfUE3vn2PG4ia1K8n/6SR1dYlhGcVs72q1ZGafGXU2auEdC4Gz8OaUQ94YwZf1KC5d/La35tej9IC5nfXAVQ=="],
 
-    "@navikt/ds-tokens": ["@navikt/ds-tokens@7.27.1", "https://npm.pkg.github.com/download/@navikt/ds-tokens/7.27.1/09aea167403a44872f282bb595d0c1cbf3193943", {}, "sha512-sJu/bQkPPKD3JB62fFCsm3uOttfsKS0C9JFJ9Xi7ZcsYhXSU9eeWxlVKBnTwR5WGDWVnwwM+I58pnPLgQjKHDg=="],
+    "@navikt/ds-tokens": ["@navikt/ds-tokens@7.28.0", "https://npm.pkg.github.com/download/@navikt/ds-tokens/7.28.0/4bbc825585bb5eb1e6d7f7be79a4b46fa4eb29d0", {}, "sha512-T+30eAyPWRZrrzItuRLoVaNFQgud4PwsQMtomSA/RQMKUUhmjPDY9/OzuDf2wBt1gsrtlkTJ2JZctSoHin7kag=="],
 
     "@next/env": ["@next/env@15.4.6", "", {}, "sha512-yHDKVTcHrZy/8TWhj0B23ylKv5ypocuCwey9ZqPyv4rPdUdRzpGCkSi03t04KBPyU96kxVtUqx6O3nE1kpxASQ=="],
 
