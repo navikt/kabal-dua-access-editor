@@ -46,5 +46,33 @@ export const getInitialAccess = (action: ActionEnum, { user, documentType, paren
     }
   }
 
+  if (documentType === DocumentTypeEnum.UPLOADED) {
+    return getUploadedAccess(action, user, parent);
+  }
+
+  return Access.UNSET;
+};
+
+const getUploadedAccess = (action: ActionEnum, user: UserEnum, parent: ParentEnum): Access => {
+  if (user === UserEnum.ROL) {
+    return Access.NOT_SUPPORTED;
+  }
+
+  if (action === ActionEnum.CREATE) {
+    return Access.ALLOWED;
+  }
+
+  if (action === ActionEnum.CHANGE_TYPE || action === ActionEnum.FINISH) {
+    return parent === ParentEnum.NONE ? Access.ALLOWED : Access.NOT_SUPPORTED;
+  }
+
+  if (action === ActionEnum.REMOVE || action === ActionEnum.RENAME) {
+    return Access.ALLOWED;
+  }
+
+  if (action === ActionEnum.WRITE) {
+    return Access.NOT_SUPPORTED;
+  }
+
   return Access.UNSET;
 };

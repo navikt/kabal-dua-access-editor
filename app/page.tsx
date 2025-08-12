@@ -7,7 +7,7 @@ import type { Metadata } from 'next/types';
 import { RemainingBadge } from '@/components/remaining-badge';
 import { Body } from '@/components/table/body';
 import { ServerTheme } from '@/components/theme/server-theme';
-import { readCsv } from '@/lib/csv/read';
+import { mergeInitialWithExistingCsv } from '@/lib/csv/write';
 import { ACTION_NAMES, ACTION_VALUES } from '@/lib/enums/actions';
 import { USECASE_DIMENSION_NAMES, USECASE_DIMENSION_VALUES } from '@/lib/enums/usecase';
 
@@ -16,7 +16,7 @@ export const generateMetadata = async (): Promise<Metadata> => ({
 });
 
 export default async function IndexPage() {
-  const { rows } = await readCsv();
+  const { rows } = await mergeInitialWithExistingCsv();
 
   return (
     <ServerTheme>
