@@ -19,7 +19,7 @@ const MESSAGE_FUNCTIONS: Record<Access, (action: ActionEnum) => string> = {
     `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi saken er sendt til ROL.`,
   [Access.SENT_TO_MU_AND_ROL]: (action) =>
     `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi saken er sendt til både MU og ROL.`,
-  [Access.ROL_USER]: (action) => `Kun tilsendt ROL kan ${ACTION_NAMES[action].toLowerCase()} dokumentet.`,
+  [Access.ROL_USER]: (action) => `ROL kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet.`,
   [Access.ROL_QUESTIONS]: (action) =>
     `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi det er spørsmål til ROL.`,
   [Access.OTHERS_ATTACHMENTS]: (action) =>
