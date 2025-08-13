@@ -45,7 +45,11 @@ ${indent(ACCESS_ENUM, 1)}
         fun throwDuaFinishedException() {
             throw ${Exception.RuntimeException}("Ferdigstilt dokument kan ikke endres. Kontakt Team Klage.")
         }
-        
+
+        fun throwMissingRolesException() {
+            throw ${Exception.MissingTilgangException}("Bruker mangler nødvendige roller. Kontakt Team Klage.")
+        }
+
         fun validateDuaAccess(
             user: ${USER_ENUM_NAME},
             caseStatus: ${CASE_STATUS_ENUM_NAME},
