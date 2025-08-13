@@ -10,6 +10,7 @@ export enum Access {
   SENT_TO_MU_AND_ROL = 'SENT_TO_MU_AND_ROL',
   ROL_USER = 'ROL_USER',
   ROL_QUESTIONS = 'ROL_QUESTIONS',
+  RETURNED_FROM_ROL = 'RETURNED_FROM_ROL',
   OTHERS_ATTACHMENTS = 'OTHERS_ATTACHMENTS',
   NOT_SUPPORTED = 'NOT_SUPPORTED',
 
@@ -33,6 +34,7 @@ export const ACCESS_NAMES: Record<Access, string> = {
   [Access.SENT_TO_MU_AND_ROL]: 'Sendt til både MU og ROL',
   [Access.ROL_USER]: 'ROL-bruker',
   [Access.ROL_QUESTIONS]: 'ROL-spørsmål',
+  [Access.RETURNED_FROM_ROL]: 'Returnert fra ROL',
   [Access.OTHERS_ATTACHMENTS]: 'Vedlegg eid av andre',
   [Access.NOT_SUPPORTED]: 'Ikke mulig',
 
