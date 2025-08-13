@@ -24,8 +24,6 @@ const MESSAGE_FUNCTIONS: Record<Access, (action: ActionEnum) => string> = {
     `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi det er spørsmål til ROL.`,
   [Access.RETURNED_FROM_ROL]: (action) =>
     `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi saken er returnert til saksbehandler.`,
-  [Access.OTHERS_ATTACHMENTS]: (action) =>
-    `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi det har vedlegg fra andre.`,
   [Access.UNSET]: (action) =>
     `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi tilgangen ikke er satt opp riktig. Kontakt Team Klage.`,
 };

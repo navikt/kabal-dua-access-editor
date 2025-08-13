@@ -11,7 +11,6 @@ export enum Access {
   ROL_USER = 'ROL_USER',
   ROL_QUESTIONS = 'ROL_QUESTIONS',
   RETURNED_FROM_ROL = 'RETURNED_FROM_ROL',
-  OTHERS_ATTACHMENTS = 'OTHERS_ATTACHMENTS',
   NOT_SUPPORTED = 'NOT_SUPPORTED',
 
   /** The value is not set. */
@@ -35,7 +34,6 @@ export const ACCESS_NAMES: Record<Access, string> = {
   [Access.ROL_USER]: 'ROL-bruker',
   [Access.ROL_QUESTIONS]: 'ROL-spørsmål',
   [Access.RETURNED_FROM_ROL]: 'Returnert fra ROL',
-  [Access.OTHERS_ATTACHMENTS]: 'Vedlegg eid av andre',
   [Access.NOT_SUPPORTED]: 'Ikke mulig',
 
   [Access.UNSET]: 'Velg tilgang',
