@@ -7,9 +7,15 @@ import { UserEnum } from '@/lib/enums/user';
 const INVALID_CASE_STATUS_FOR_USER: Record<UserEnum, CaseStatus[]> = {
   [UserEnum.SAKSBEHANDLER]: [],
   [UserEnum.TILDELT_SAKSBEHANDLER]: [CaseStatus.LEDIG, CaseStatus.FULLFOERT],
-  [UserEnum.TILDELT_MEDUNDERSKRIVER]: [CaseStatus.LEDIG, CaseStatus.FULLFOERT],
+  [UserEnum.TILDELT_MEDUNDERSKRIVER]: [
+    CaseStatus.LEDIG,
+    CaseStatus.FULLFOERT,
+    CaseStatus.WITH_SAKSBEHANDLER,
+    CaseStatus.WITH_ROL,
+    CaseStatus.RETURNED_FROM_ROL,
+  ],
   [UserEnum.ROL]: [],
-  [UserEnum.TILDELT_ROL]: [CaseStatus.LEDIG, CaseStatus.FULLFOERT],
+  [UserEnum.TILDELT_ROL]: [CaseStatus.LEDIG, CaseStatus.FULLFOERT, CaseStatus.WITH_SAKSBEHANDLER, CaseStatus.WITH_MU],
 };
 
 const VALID_ATTACHMENT_DOCUMENT_TYPES: DocumentTypeEnum[] = [
