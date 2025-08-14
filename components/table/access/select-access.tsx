@@ -113,12 +113,12 @@ const ACCESS_COLORS: Partial<Record<Access, string>> = {
   [Access.SENT_TO_MU]: 'text-ax-text-warning-decoration',
   [Access.SENT_TO_ROL]: ROL_COLOR_CLASS,
   [Access.ROL_REQUIRED]: ROL_COLOR_CLASS,
-  [Access.ROL_QUESTIONS]: ROL_COLOR_CLASS,
+  [Access.NOT_SUPPORTED_ROL_QUESTIONS]: ROL_COLOR_CLASS,
   [Access.ROL_USER]: ROL_COLOR_CLASS,
   [Access.NOT_ASSIGNED_ROL]: ROL_COLOR_CLASS,
   [Access.NOT_SUPPORTED]: 'text-ax-text-neutral-decoration',
   [Access.NOT_ASSIGNED]: 'text-ax-text-accent-decoration',
-  [Access.NOT_ASSIGNED_OR_MEDUNDERSKRIVER]: 'text-ax-text-accent-decoration',
+  [Access.NOT_ASSIGNED_OR_MU]: 'text-ax-text-accent-decoration',
   [Access.NOT_ASSIGNED_OR_ROL]: 'text-ax-text-accent-decoration',
 };
 

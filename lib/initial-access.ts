@@ -6,21 +6,6 @@ import { DocumentTypeEnum } from '@/lib/enums/document-type';
 import { ParentEnum } from '@/lib/enums/parent';
 import { UserEnum } from '@/lib/enums/user';
 
-const NOT_SUPPORTED_DOCUMENT_TYPES: Record<ActionEnum, DocumentTypeEnum[]> = {
-  [ActionEnum.CREATE]: [],
-  [ActionEnum.WRITE]: [DocumentTypeEnum.JOURNALFOERT, DocumentTypeEnum.UPLOADED],
-  [ActionEnum.REMOVE]: [],
-  [ActionEnum.CHANGE_TYPE]: [
-    DocumentTypeEnum.JOURNALFOERT,
-    DocumentTypeEnum.ROL_QUESTIONS,
-    DocumentTypeEnum.ROL_ANSWERS,
-  ],
-  [ActionEnum.RENAME]: [DocumentTypeEnum.JOURNALFOERT, DocumentTypeEnum.ROL_ANSWERS],
-  [ActionEnum.FINISH]: [DocumentTypeEnum.JOURNALFOERT, DocumentTypeEnum.ROL_ANSWERS],
-};
-
-const INVALID_ACTIONS_FOR_ATTACHMENTS: ActionEnum[] = [ActionEnum.CHANGE_TYPE, ActionEnum.FINISH];
-
 const VALID_CREATOR_FOR_USER: Record<UserEnum, CreatorEnum> = {
   [UserEnum.SAKSBEHANDLER]: CreatorEnum.NONE,
   [UserEnum.TILDELT_SAKSBEHANDLER]: CreatorEnum.KABAL_SAKSBEHANDLING,
@@ -30,14 +15,7 @@ const VALID_CREATOR_FOR_USER: Record<UserEnum, CreatorEnum> = {
 };
 
 export const getInitialAccess = (action: ActionEnum, { user, documentType, parent, creator }: RowUsecase): Access => {
-  if (NOT_SUPPORTED_DOCUMENT_TYPES[action].includes(documentType)) {
-    return Access.NOT_SUPPORTED;
-  }
-
-  if (parent !== ParentEnum.NONE && INVALID_ACTIONS_FOR_ATTACHMENTS.includes(action)) {
-    return Access.NOT_SUPPORTED;
-  }
-
+  // Only the current user can be the creator.
   if (action === ActionEnum.CREATE) {
     const validCreator = VALID_CREATOR_FOR_USER[user];
 
@@ -46,6 +24,43 @@ export const getInitialAccess = (action: ActionEnum, { user, documentType, paren
     }
   }
 
+  // Journalførte dokumenter
+  if (documentType === DocumentTypeEnum.JOURNALFOERT) {
+    if (action === ActionEnum.RENAME) {
+      return Access.NOT_SUPPORTED_JOURNALFOERT;
+    }
+
+    if (action === ActionEnum.WRITE) {
+      return Access.NOT_SUPPORTED_JOURNALFOERT;
+    }
+
+    if (action === ActionEnum.CHANGE_TYPE) {
+      return Access.NOT_SUPPORTED_JOURNALFOERT;
+    }
+  }
+
+  // Svar fra ROL
+  if (documentType === DocumentTypeEnum.ROL_ANSWERS) {
+    if (action === ActionEnum.CHANGE_TYPE) {
+      return Access.NOT_SUPPORTED;
+    }
+  }
+
+  // Spørsmål til ROL
+  if (documentType === DocumentTypeEnum.ROL_QUESTIONS) {
+    if (action === ActionEnum.CHANGE_TYPE) {
+      return Access.NOT_SUPPORTED_ROL_QUESTIONS;
+    }
+  }
+
+  // Alle vedlegg
+  if (parent !== ParentEnum.NONE) {
+    if (action === ActionEnum.CHANGE_TYPE || action === ActionEnum.FINISH) {
+      return Access.NOT_SUPPORTED_ATTACHMENT;
+    }
+  }
+
+  // Opplastede dokumenter
   if (documentType === DocumentTypeEnum.UPLOADED) {
     return getUploadedAccess(action, user, parent);
   }

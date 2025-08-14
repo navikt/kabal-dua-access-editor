@@ -114,7 +114,7 @@ const ACCESS_TO_EXCEPTION: Record<Access, Exception> = {
   [Access.ALLOWED]: Exception.RuntimeException,
   [Access.NOT_SUPPORTED]: Exception.DokumentValidationException,
   [Access.NOT_ASSIGNED]: Exception.MissingTilgangException,
-  [Access.NOT_ASSIGNED_OR_MEDUNDERSKRIVER]: Exception.MissingTilgangException,
+  [Access.NOT_ASSIGNED_OR_MU]: Exception.MissingTilgangException,
   [Access.NOT_ASSIGNED_ROL]: Exception.MissingTilgangException,
   [Access.NOT_ASSIGNED_OR_ROL]: Exception.MissingTilgangException,
   [Access.ROL_REQUIRED]: Exception.MissingTilgangException,
@@ -122,8 +122,13 @@ const ACCESS_TO_EXCEPTION: Record<Access, Exception> = {
   [Access.SENT_TO_ROL]: Exception.MissingTilgangException,
   [Access.SENT_TO_MU_AND_ROL]: Exception.MissingTilgangException,
   [Access.ROL_USER]: Exception.MissingTilgangException,
-  [Access.ROL_QUESTIONS]: Exception.DokumentValidationException,
   [Access.RETURNED_FROM_ROL]: Exception.MissingTilgangException,
+  [Access.NOT_SUPPORTED_ROL_QUESTIONS]: Exception.DokumentValidationException,
+  [Access.NOT_SUPPORTED_ROL_ANSWERS]: Exception.DokumentValidationException,
+  [Access.NOT_SUPPORTED_JOURNALFOERT]: Exception.DokumentValidationException,
+  [Access.NOT_SUPPORTED_ATTACHMENT]: Exception.DokumentValidationException,
+  [Access.NOT_SUPPORTED_UPLOADED]: Exception.DokumentValidationException,
+  [Access.NOT_SUPPORTED_FINISHED]: Exception.RuntimeException,
   [Access.UNSET]: Exception.RuntimeException,
 };
 

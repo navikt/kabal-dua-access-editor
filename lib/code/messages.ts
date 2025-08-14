@@ -4,9 +4,8 @@ import { ACTION_NAMES, ACTION_VALUES, type ActionEnum } from '@/lib/enums/action
 const MESSAGE_FUNCTIONS: Record<Access, (action: ActionEnum) => string> = {
   [Access.ALLOWED]: (action) =>
     `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet. Teknisk feil. Kontakt Team Klage.`,
-  [Access.NOT_SUPPORTED]: (action) => `Det er umulig å ${ACTION_NAMES[action].toLowerCase()} dokumentet.`,
   [Access.NOT_ASSIGNED]: (action) => `Kun tildelt saksbehandler kan ${ACTION_NAMES[action].toLowerCase()} dokumentet.`,
-  [Access.NOT_ASSIGNED_OR_MEDUNDERSKRIVER]: (action) =>
+  [Access.NOT_ASSIGNED_OR_MU]: (action) =>
     `Kun tildelt saksbehandler eller tilsendt medunderskriver kan ${ACTION_NAMES[action].toLowerCase()} dokumentet.`,
   [Access.NOT_ASSIGNED_ROL]: (action) => `Kun tilsendt ROL kan ${ACTION_NAMES[action].toLowerCase()} dokumentet.`,
   [Access.NOT_ASSIGNED_OR_ROL]: (action) =>
@@ -20,10 +19,21 @@ const MESSAGE_FUNCTIONS: Record<Access, (action: ActionEnum) => string> = {
   [Access.SENT_TO_MU_AND_ROL]: (action) =>
     `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi saken er sendt til både MU og ROL.`,
   [Access.ROL_USER]: (action) => `ROL kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet.`,
-  [Access.ROL_QUESTIONS]: (action) =>
-    `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi det er spørsmål til ROL.`,
   [Access.RETURNED_FROM_ROL]: (action) =>
     `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi saken er returnert til saksbehandler.`,
+  [Access.NOT_SUPPORTED_ROL_QUESTIONS]: (action) =>
+    `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi det er Spørsmål til ROL.`,
+  [Access.NOT_SUPPORTED_ROL_ANSWERS]: (action) =>
+    `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi det er Svar fra ROL.`,
+  [Access.NOT_SUPPORTED_JOURNALFOERT]: (action) =>
+    `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi det er journalført.`,
+  [Access.NOT_SUPPORTED_ATTACHMENT]: (action) =>
+    `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi det er et vedlegg.`,
+  [Access.NOT_SUPPORTED_UPLOADED]: (action) =>
+    `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi det er opplastet.`,
+  [Access.NOT_SUPPORTED_FINISHED]: (action) =>
+    `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi saken er ferdigstilt.`,
+  [Access.NOT_SUPPORTED]: (action) => `Det er umulig å ${ACTION_NAMES[action].toLowerCase()} dokumentet.`,
   [Access.UNSET]: (action) =>
     `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet fordi tilgangen ikke er satt opp riktig. Kontakt Team Klage.`,
 };
