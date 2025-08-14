@@ -50,6 +50,10 @@ ${indent(ACCESS_ENUM, 1)}
             throw ${Exception.MissingTilgangException}("Bruker mangler nødvendige roller. Kontakt Team Klage.")
         }
 
+        fun throwFeilregistrertException() {
+            throw ${Exception.RuntimeException}("Behandlingen er feilregistrert.")
+        }
+
         fun validateDuaAccess(
             user: ${USER_ENUM_NAME},
             caseStatus: ${CASE_STATUS_ENUM_NAME},

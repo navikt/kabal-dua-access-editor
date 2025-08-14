@@ -28,6 +28,7 @@ export const accessToTypeScript = (access: ParsedCsv) => {
   return `
 export const FINISHED_ERROR = 'Ferdigstilt dokument kan ikke endres. Kontakt Team Klage.';
 export const MISSING_ROLES_ERROR = 'Bruker mangler nødvendige roller. Kontakt Team Klage.';
+export const FEILREGISTRERT_ERROR = 'Behandlingen er feilregistrert.';
 
 export const getDuaAccessError = (
   user: ${USER_ENUM_NAME},
