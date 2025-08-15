@@ -86,12 +86,12 @@ ${indent(EXCEPTION_CASES.join('\n'), 4)}
         }
 
         // ${mapLines.length} entries
-        private val accessMap = mapOf(
+        private val accessMap = hashMapOf(
 ${indent(toLines(mapLines), 3)},
         )
         
         // ${ERROR_MESSAGE_MAP_LINES.length} entries
-        private val errorMessageMap = mapOf(
+        private val errorMessageMap = hashMapOf(
 ${indent(toLines(ERROR_MESSAGE_MAP_LINES), 3)},
         )
     }
