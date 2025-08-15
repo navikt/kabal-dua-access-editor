@@ -10,6 +10,7 @@ const MESSAGE_FUNCTIONS: Record<Access, (action: ActionEnum) => string> = {
   [Access.NOT_ASSIGNED_ROL]: (action) => `Kun tilsendt ROL kan ${ACTION_NAMES[action].toLowerCase()} dokumentet.`,
   [Access.NOT_ASSIGNED_OR_ROL]: (action) =>
     `Kun tildelt saksbehandler eller tilsendt ROL kan ${ACTION_NAMES[action].toLowerCase()} dokumentet.`,
+  [Access.NOT_SAKSBEHANDLER]: (action) => `Kun saksbehandlere kan ${ACTION_NAMES[action].toLowerCase()} dokumentet.`,
   [Access.ROL_REQUIRED]: (action) =>
     `Kan ikke ${ACTION_NAMES[action].toLowerCase()} dokumentet før ROL har returnert saken.`,
   [Access.SENT_TO_MU]: (action) =>

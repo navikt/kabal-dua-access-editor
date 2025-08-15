@@ -117,6 +117,7 @@ const ACCESS_TO_EXCEPTION: Record<Access, Exception> = {
   [Access.NOT_ASSIGNED_OR_MU]: Exception.MissingTilgangException,
   [Access.NOT_ASSIGNED_ROL]: Exception.MissingTilgangException,
   [Access.NOT_ASSIGNED_OR_ROL]: Exception.MissingTilgangException,
+  [Access.NOT_SAKSBEHANDLER]: Exception.MissingTilgangException,
   [Access.ROL_REQUIRED]: Exception.MissingTilgangException,
   [Access.SENT_TO_MU]: Exception.MissingTilgangException,
   [Access.SENT_TO_ROL]: Exception.MissingTilgangException,
