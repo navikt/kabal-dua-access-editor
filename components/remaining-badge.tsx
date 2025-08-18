@@ -1,14 +1,14 @@
 import { BoxNew, HStack, Tooltip } from '@navikt/ds-react';
 import type { ParsedRow } from '@/lib/data';
-import { getRowsDone, getRowsTotal } from '@/lib/row-remaining';
+import { useRowsDone, useRowsTotal } from '@/lib/row-remaining';
 
 interface RemainingBadgeProps {
   rows: ParsedRow[];
 }
 
 export const RemainingBadge = ({ rows }: RemainingBadgeProps) => {
-  const total = getRowsTotal(rows);
-  const done = getRowsDone(rows, total);
+  const total = useRowsTotal(rows);
+  const done = useRowsDone(rows, total);
 
   return (
     <Tooltip content="Ferdige tilgangsinnstillinger" placement="top">

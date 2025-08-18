@@ -9,7 +9,7 @@ import { CREATOR_COLORS, CREATOR_NAMES } from '@/lib/enums/creator';
 import { DOCUMENT_TYPE_COLORS, DOCUMENT_TYPE_NAMES } from '@/lib/enums/document-type';
 import { PARENT_COLORS, PARENT_NAMES } from '@/lib/enums/parent';
 import { USER_COLORS, USER_NAMES } from '@/lib/enums/user';
-import { getIsRowDone } from '@/lib/row-remaining';
+import { useIsRowDone } from '@/lib/row-remaining';
 
 interface RowProps {
   rowKey: string;
@@ -24,7 +24,7 @@ export const Row = ({ rowKey, row, usecase, rowNumber }: RowProps) => {
   return (
     <TableRow>
       <TableDataCell>
-        {getIsRowDone(row) ? <CheckmarkIcon aria-hidden className="text-ax-text-success" /> : null}
+        {useIsRowDone(row) ? <CheckmarkIcon aria-hidden className="text-ax-text-success" /> : null}
       </TableDataCell>
       <TableDataCell>{rowNumber}</TableDataCell>
       <UsecaseCell variant={USER_COLORS[user]}>{USER_NAMES[user]}</UsecaseCell>
