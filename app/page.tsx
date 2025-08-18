@@ -37,7 +37,7 @@ export default async function IndexPage({ searchParams }: IndexPageProps) {
 
   return (
     <ServerTheme>
-      <BoxNew paddingInline="4" className="pb-128">
+      <BoxNew paddingInline="4" className="pb-128" minHeight="100%">
         <RemainingBadge rows={rows} />
 
         <Table zebraStripes size="small" stickyHeader>

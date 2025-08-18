@@ -58,7 +58,7 @@ export const ThemeSwitcher = ({ serverTheme, children }: Props) => {
   }, []);
 
   return (
-    <Theme theme={theme}>
+    <Theme theme={theme} className="min-h-full">
       {children}
 
       <Tooltip
