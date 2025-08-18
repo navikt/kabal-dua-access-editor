@@ -63,7 +63,7 @@ const UserHeader = ({ filter }: UserHeaderProps) => {
   const setUserFilter = useSetUserFilter();
 
   return (
-    <DropdownHeader label={USECASE_DIMENSION_NAMES.USER}>
+    <DropdownHeader label={USECASE_DIMENSION_NAMES.USER} count={usersFilter.length}>
       <CheckboxGroup
         size="small"
         legend={USECASE_DIMENSION_NAMES.USER}
@@ -90,7 +90,7 @@ const CaseStatusHeader = ({ filter }: CaseStatusHeaderProps) => {
   const setCaseStatusFilter = useSetCaseStatusFilter();
 
   return (
-    <DropdownHeader label={USECASE_DIMENSION_NAMES.CASE_STATUS}>
+    <DropdownHeader label={USECASE_DIMENSION_NAMES.CASE_STATUS} count={caseStatusFilter.length}>
       <CheckboxGroup
         size="small"
         legend={USECASE_DIMENSION_NAMES.CASE_STATUS}
@@ -117,7 +117,7 @@ const DocumentTypeHeader = ({ filter }: DocumentTypeHeaderProps) => {
   const setDocumentTypeFilter = useSetDocumentTypeFilter();
 
   return (
-    <DropdownHeader label={USECASE_DIMENSION_NAMES.DOCUMENT_TYPE}>
+    <DropdownHeader label={USECASE_DIMENSION_NAMES.DOCUMENT_TYPE} count={documentTypeFilter.length}>
       <CheckboxGroup
         size="small"
         legend={USECASE_DIMENSION_NAMES.DOCUMENT_TYPE}
@@ -144,7 +144,7 @@ const ParentHeader = ({ filter }: ParentHeaderProps) => {
   const setParentFilter = useSetParentFilter();
 
   return (
-    <DropdownHeader label={USECASE_DIMENSION_NAMES.PARENT}>
+    <DropdownHeader label={USECASE_DIMENSION_NAMES.PARENT} count={parentFilter.length}>
       <CheckboxGroup
         size="small"
         legend={USECASE_DIMENSION_NAMES.PARENT}
@@ -171,7 +171,7 @@ const CreatorHeader = ({ filter }: CreatorHeaderProps) => {
   const setCreatorFilter = useSetCreatorFilter();
 
   return (
-    <DropdownHeader label={USECASE_DIMENSION_NAMES.CREATOR}>
+    <DropdownHeader label={USECASE_DIMENSION_NAMES.CREATOR} count={creatorFilter.length}>
       <CheckboxGroup
         size="small"
         legend={USECASE_DIMENSION_NAMES.CREATOR}
@@ -192,9 +192,10 @@ const CreatorHeader = ({ filter }: CreatorHeaderProps) => {
 interface DropdownHeaderProps {
   label: string;
   children: React.ReactNode;
+  count: number;
 }
 
-const DropdownHeader = ({ label, children }: DropdownHeaderProps) => {
+const DropdownHeader = ({ label, children, count }: DropdownHeaderProps) => {
   const ref = useRef<HTMLTableCellElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -203,12 +204,12 @@ const DropdownHeader = ({ label, children }: DropdownHeaderProps) => {
   return (
     <TableHeaderCell className="whitespace-nowrap relative" ref={ref}>
       <Button
-        variant="tertiary-neutral"
+        variant={count !== 0 ? 'primary-neutral' : 'tertiary-neutral'}
         size="small"
         className="w-full justify-start"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {label}
+        {label} ({count})
       </Button>
       {isOpen ? (
         <BoxNew
