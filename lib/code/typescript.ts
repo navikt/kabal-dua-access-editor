@@ -42,7 +42,7 @@ export const getDuaAccessError = (
   const access = ACCESS_MAP[key];
   
   if (access === undefined) {
-    return \`"\${key}"\ skal ikke være mulig. Kontakt Team Klage.\`;
+    return \`"\${key}" skal ikke være mulig. Kontakt Team Klage.\`;
   }
 
   if (access === ${ACCESS_ENUM_NAME}.${Access.ALLOWED}) {

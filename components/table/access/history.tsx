@@ -69,7 +69,12 @@ class History {
 
     abort();
     const key = `${usecaseToKey(usecase)}-${action}`;
-    this.#listeners[key]?.forEach((listener) => listener(from));
+    const listeners = this.#listeners[key];
+    if (listeners !== undefined) {
+      for (const listener of listeners) {
+        listener(from);
+      }
+    }
 
     const success = await sendAccessUpdate(usecase, action, from);
 
@@ -80,7 +85,14 @@ class History {
       console.debug('Failed to undo action');
       this.#undoStack.push(entry); // Re-add the entry to undo stack if undo fails
       this.#redoStack = this.#redoStack.filter((e) => e !== entry); // Keep the entry in undo stack if undo fails
-      this.#listeners[key]?.forEach((listener) => listener(to)); // Notify listeners with the original state
+
+      // Notify listeners with the original state
+      const listeners = this.#listeners[key];
+      if (listeners !== undefined) {
+        for (const listener of listeners) {
+          listener(to);
+        }
+      }
     }
   }
 
@@ -98,7 +110,13 @@ class History {
 
     abort();
     const key = `${usecaseToKey(usecase)}-${action}`;
-    this.#listeners[key]?.forEach((listener) => listener(to));
+    const listeners = this.#listeners[key];
+
+    if (listeners !== undefined) {
+      for (const listener of listeners) {
+        listener(to);
+      }
+    }
 
     const success = await sendAccessUpdate(usecase, action, to);
 
@@ -109,7 +127,14 @@ class History {
       console.debug('Failed to redo action');
       this.#undoStack = this.#undoStack.filter((e) => e !== entry); // Remove the entry from undo stack if redo fails
       this.#redoStack.push(entry); // Re-add the entry to redo stack if redo fails
-      this.#listeners[key]?.forEach((listener) => listener(from)); // Notify listeners with the original state
+
+      // Notify listeners with the original state
+      const listeners = this.#listeners[key];
+      if (listeners !== undefined) {
+        for (const listener of listeners) {
+          listener(from);
+        }
+      }
     }
   }
 }

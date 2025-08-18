@@ -1,4 +1,5 @@
 @import "tailwindcss";
 @import "@navikt/ds-css/darkside" layer(components);
 
+/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind */
 @config '../tailwind.config.js';
