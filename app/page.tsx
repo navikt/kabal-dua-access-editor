@@ -6,17 +6,34 @@ import { TableHeader, TableHeaderCell, TableRow } from '@navikt/ds-react/Table';
 import type { Metadata } from 'next/types';
 import { RemainingBadge } from '@/components/remaining-badge';
 import { Body } from '@/components/table/body';
+import { FilterHeader } from '@/components/table/header';
 import { ServerTheme } from '@/components/theme/server-theme';
 import { mergeInitialWithExistingCsv } from '@/lib/csv/write';
 import { ACTION_NAMES, ACTION_VALUES } from '@/lib/enums/actions';
-import { USECASE_DIMENSION_NAMES, USECASE_DIMENSION_VALUES } from '@/lib/enums/usecase';
+import { type CaseStatus, isCaseStatus } from '@/lib/enums/case-status';
+import { type CreatorEnum, isCreator } from '@/lib/enums/creator';
+import { type DocumentTypeEnum, isDocumentType } from '@/lib/enums/document-type';
+import { isParent, type ParentEnum } from '@/lib/enums/parent';
+import { USECASE_DIMENSION_VALUES } from '@/lib/enums/usecase';
+import { isUser, type UserEnum } from '@/lib/enums/user';
 
 export const generateMetadata = async (): Promise<Metadata> => ({
   title: 'Kabal DUA Access Editor',
 });
 
-export default async function IndexPage() {
+type SearchParams = Promise<{ [key: string]: string | undefined }>;
+
+interface IndexPageProps {
+  searchParams: SearchParams;
+}
+
+export default async function IndexPage({ searchParams }: IndexPageProps) {
   const { rows } = await mergeInitialWithExistingCsv();
+  const userFilter = await getQueryParam(searchParams, 'user', isUser);
+  const caseStatusFilter = await getQueryParam(searchParams, 'caseStatus', isCaseStatus);
+  const documentTypeFilter = await getQueryParam(searchParams, 'documentType', isDocumentType);
+  const parentFilter = await getQueryParam(searchParams, 'parent', isParent);
+  const creatorFilter = await getQueryParam(searchParams, 'creator', isCreator);
 
   return (
     <ServerTheme>
@@ -33,9 +50,15 @@ export default async function IndexPage() {
               <TableHeaderCell className="whitespace-nowrap">#</TableHeaderCell>
 
               {USECASE_DIMENSION_VALUES.map((dimension) => (
-                <TableHeaderCell key={dimension} className="whitespace-nowrap">
-                  {USECASE_DIMENSION_NAMES[dimension]}
-                </TableHeaderCell>
+                <FilterHeader
+                  key={dimension}
+                  dimension={dimension}
+                  userFilter={userFilter}
+                  caseStatusFilter={caseStatusFilter}
+                  documentTypeFilter={documentTypeFilter}
+                  parentFilter={parentFilter}
+                  creatorFilter={creatorFilter}
+                />
               ))}
 
               {ACTION_VALUES.map((action) => (
@@ -46,9 +69,30 @@ export default async function IndexPage() {
             </TableRow>
           </TableHeader>
 
-          <Body rows={rows} />
+          <Body
+            rows={rows}
+            userServerFilter={userFilter}
+            caseStatusServerFilter={caseStatusFilter}
+            documentTypeServerFilter={documentTypeFilter}
+            parentServerFilter={parentFilter}
+            creatorServerFilter={creatorFilter}
+          />
         </Table>
       </BoxNew>
     </ServerTheme>
   );
 }
+
+type Guard<T extends UserEnum | CaseStatus | DocumentTypeEnum | ParentEnum | CreatorEnum> = (
+  value: string,
+) => value is T;
+
+const getQueryParam = async <T extends UserEnum | CaseStatus | DocumentTypeEnum | ParentEnum | CreatorEnum>(
+  searchParams: SearchParams,
+  key: string,
+  guard: Guard<T>,
+): Promise<T[]> => {
+  const params = await searchParams;
+
+  return params[key]?.split(',').filter(guard) ?? [];
+};

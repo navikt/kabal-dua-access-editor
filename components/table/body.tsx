@@ -3,6 +3,13 @@
 import { TableBody } from '@navikt/ds-react/Table';
 import { useEffect } from 'react';
 import {
+  useCaseStatusFilter,
+  useCreatorFilter,
+  useDocumentTypeFilter,
+  useParentFilter,
+  useUserFilter,
+} from '@/components/table/filters';
+import {
   decrementOpenIndex,
   getOpenIndex,
   incrementOpenIndex,
@@ -14,15 +21,38 @@ import {
 import { Row } from '@/components/table/row';
 import type { ParsedRow } from '@/lib/data';
 import { ALL_USECASES } from '@/lib/enums/all';
+import type { CaseStatus } from '@/lib/enums/case-status';
+import type { CreatorEnum } from '@/lib/enums/creator';
+import type { DocumentTypeEnum } from '@/lib/enums/document-type';
+import type { ParentEnum } from '@/lib/enums/parent';
+import type { UserEnum } from '@/lib/enums/user';
 import { isMetaKey } from '@/lib/meta-key';
 import { matchUsecase } from '@/lib/usecase';
 import { usecaseToKey } from '@/lib/usecase-key';
 
 interface Props {
   rows: ParsedRow[];
+  userServerFilter: UserEnum[];
+  caseStatusServerFilter: CaseStatus[];
+  documentTypeServerFilter: DocumentTypeEnum[];
+  parentServerFilter: ParentEnum[];
+  creatorServerFilter: CreatorEnum[];
 }
 
-export const Body = ({ rows }: Props) => {
+export const Body = ({
+  rows,
+  userServerFilter,
+  caseStatusServerFilter,
+  documentTypeServerFilter,
+  parentServerFilter,
+  creatorServerFilter,
+}: Props) => {
+  const usersFilter = useUserFilter(userServerFilter);
+  const caseStatusFilter = useCaseStatusFilter(caseStatusServerFilter);
+  const documentTypeFilter = useDocumentTypeFilter(documentTypeServerFilter);
+  const parentFilter = useParentFilter(parentServerFilter);
+  const creatorFilter = useCreatorFilter(creatorServerFilter);
+
   useEffect(() => {
     window.addEventListener('keydown', listener);
 
@@ -32,6 +62,26 @@ export const Body = ({ rows }: Props) => {
   return (
     <TableBody>
       {ALL_USECASES.map((usecase, index) => {
+        if (usersFilter.length !== 0 && !usersFilter.includes(usecase.user)) {
+          return null;
+        }
+
+        if (caseStatusFilter.length !== 0 && !caseStatusFilter.includes(usecase.caseStatus)) {
+          return null;
+        }
+
+        if (documentTypeFilter.length !== 0 && !documentTypeFilter.includes(usecase.documentType)) {
+          return null;
+        }
+
+        if (parentFilter.length !== 0 && !parentFilter.includes(usecase.parent)) {
+          return null;
+        }
+
+        if (creatorFilter.length !== 0 && !creatorFilter.includes(usecase.creator)) {
+          return null;
+        }
+
         const key = usecaseToKey(usecase);
         const row = rows.find((row) => matchUsecase(row.usecase, usecase));
 
