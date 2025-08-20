@@ -53,10 +53,6 @@ export const isValidCase = ({ user, caseStatus, documentType, parent }: RowUseca
     }
   }
 
-  if (parent === ParentEnum.UPLOADED && documentType !== DocumentTypeEnum.UPLOADED) {
-    return false;
-  }
-
   if (parent === ParentEnum.NONE && !VALID_MAIN_DOCUMENT_TYPES.includes(documentType)) {
     return false;
   }
