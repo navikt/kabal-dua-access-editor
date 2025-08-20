@@ -28,7 +28,7 @@
     "@navikt/ds-tailwind": "7.28.1",
     "@wooorm/starry-night": "3.8.0",
     "hast-util-to-jsx-runtime": "2.3.6",
-    "next": "15.4.6",
+    "next": "15.5.0",
     "react": "19.1.1",
     "react-dom": "19.1.1"
   }
