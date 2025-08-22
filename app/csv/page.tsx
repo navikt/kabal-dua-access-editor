@@ -10,18 +10,18 @@ export const metadata: Metadata = {
 };
 
 export default async function Csv() {
-  const draft = await readCsv();
+  const { rows } = await readCsv();
 
-  const children = accessToCsv(draft);
+  const { csv, entries, hash } = accessToCsv(rows);
 
   return (
     <Theme theme={ThemeEnum.DARK}>
       <BoxNew position="relative" background="default" padding="8" width="fit-content" minWidth="100%">
-        <CopyButton className="fixed top-8 right-8" text={children}>
+        <CopyButton className="fixed top-8 right-8" text={csv}>
           Kopier CSV
         </CopyButton>
 
-        <pre>{children}</pre>
+        <pre>{`# Hash: ${hash}\n# Entries: ${entries}\n${csv}`}</pre>
       </BoxNew>
     </Theme>
   );

@@ -1,3 +1,4 @@
+import { accessToCsv } from '@/lib/code/csv';
 import { rowToEntries } from '@/lib/code/entries';
 import { ERROR_MESSAGES } from '@/lib/code/messages';
 import type { ParsedCsv } from '@/lib/data';
@@ -19,6 +20,7 @@ const ACCESS_ENUM_NAME = 'DuaAccessEnum';
 
 export const accessToTypeScript = (access: ParsedCsv) => {
   const { rows } = access;
+  const { hash } = accessToCsv(rows);
 
   const mapLines = rows.reduce<string[]>(
     (acc, row) => acc.concat(rowToEntries(row, (key, value) => `'${key}': ${ACCESS_ENUM_NAME}.${value}`)),
@@ -68,6 +70,7 @@ export const DUA_ACTION_VALUES = Object.values(${ACTION_ENUM_NAME});
 
 ${ACCESS_ENUM}
 
+// Hash: ${hash}
 // ${mapLines.length} entries
 const ACCESS_MAP: Record<string, ${ACCESS_ENUM_NAME}> = Object.freeze({
   ${mapLines.join(',\n  ')},
