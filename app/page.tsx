@@ -5,10 +5,12 @@ import { BoxNew, Table } from '@navikt/ds-react';
 import { TableHeader, TableHeaderCell, TableRow } from '@navikt/ds-react/Table';
 import type { Metadata } from 'next/types';
 import { RemainingBadge } from '@/components/remaining-badge';
+import { AccessFilter } from '@/components/table/access-filter';
 import { Body } from '@/components/table/body';
 import { FilterHeader } from '@/components/table/header';
 import { ServerTheme } from '@/components/theme/server-theme';
 import { mergeInitialWithExistingCsv } from '@/lib/csv/write';
+import { isAccess } from '@/lib/enums/access';
 import { ACTION_NAMES, ACTION_VALUES } from '@/lib/enums/actions';
 import { type CaseStatus, isCaseStatus } from '@/lib/enums/case-status';
 import { type CreatorEnum, isCreator } from '@/lib/enums/creator';
@@ -34,11 +36,14 @@ export default async function IndexPage({ searchParams }: IndexPageProps) {
   const documentTypeFilter = await getQueryParam(searchParams, 'documentType', isDocumentType);
   const parentFilter = await getQueryParam(searchParams, 'parent', isParent);
   const creatorFilter = await getQueryParam(searchParams, 'creator', isCreator);
+  const accessFilter = await getQueryParam(searchParams, 'access', isAccess);
 
   return (
     <ServerTheme>
-      <BoxNew paddingInline="4" className="pb-128" minHeight="100%">
+      <BoxNew padding="4" className="pb-128" minHeight="100%">
         <RemainingBadge rows={rows} />
+
+        <AccessFilter filter={accessFilter} />
 
         <Table zebraStripes size="small" stickyHeader>
           <TableHeader>
@@ -76,6 +81,7 @@ export default async function IndexPage({ searchParams }: IndexPageProps) {
             documentTypeServerFilter={documentTypeFilter}
             parentServerFilter={parentFilter}
             creatorServerFilter={creatorFilter}
+            accessServerFilter={accessFilter}
           />
         </Table>
       </BoxNew>
@@ -87,7 +93,7 @@ type Guard<T extends UserEnum | CaseStatus | DocumentTypeEnum | ParentEnum | Cre
   value: string,
 ) => value is T;
 
-const getQueryParam = async <T extends UserEnum | CaseStatus | DocumentTypeEnum | ParentEnum | CreatorEnum>(
+const getQueryParam = async <T extends UserEnum | CaseStatus | DocumentTypeEnum | ParentEnum | CreatorEnum | Access>(
   searchParams: SearchParams,
   key: string,
   guard: Guard<T>,

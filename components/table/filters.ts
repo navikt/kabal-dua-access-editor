@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { useSyncExternalStore } from 'react';
+import { type Access, isAccess } from '@/lib/enums/access';
 import { type CaseStatus, isCaseStatus } from '@/lib/enums/case-status';
 import { type CreatorEnum, isCreator } from '@/lib/enums/creator';
 import { type DocumentTypeEnum, isDocumentType } from '@/lib/enums/document-type';
@@ -9,14 +10,11 @@ import { isParent, type ParentEnum } from '@/lib/enums/parent';
 import { isUser, type UserEnum } from '@/lib/enums/user';
 import { Observable } from '@/lib/observable/observable';
 
-type Guard<T extends UserEnum | CaseStatus | DocumentTypeEnum | ParentEnum | CreatorEnum> = (
-  value: string,
-) => value is T;
+type FilterEnum = UserEnum | CaseStatus | DocumentTypeEnum | ParentEnum | CreatorEnum | Access;
 
-const getQuery = <T extends UserEnum | CaseStatus | DocumentTypeEnum | ParentEnum | CreatorEnum>(
-  key: string,
-  guard: Guard<T>,
-): T[] => {
+type Guard<T extends FilterEnum> = (value: string) => value is T;
+
+const getQuery = <T extends FilterEnum>(key: string, guard: Guard<T>): T[] => {
   if (typeof window === 'undefined') {
     return [];
   }
@@ -36,6 +34,7 @@ const caseStatusFilterStore = new Observable<CaseStatus[]>(getQuery('caseStatus'
 const documentTypeFilterStore = new Observable<DocumentTypeEnum[]>(getQuery('documentType', isDocumentType));
 const parentFilterStore = new Observable<ParentEnum[]>(getQuery('parent', isParent));
 const creatorFilterStore = new Observable<CreatorEnum[]>(getQuery('creator', isCreator));
+const accessStore = new Observable<Access[]>(getQuery('access', isAccess));
 
 export const useUserFilter = (serverValue: UserEnum[]) =>
   useSyncExternalStore(userFilterStore.subscribe, userFilterStore.get, () => serverValue);
@@ -47,6 +46,8 @@ export const useParentFilter = (serverValue: ParentEnum[]) =>
   useSyncExternalStore(parentFilterStore.subscribe, parentFilterStore.get, () => serverValue);
 export const useCreatorFilter = (serverValue: CreatorEnum[]) =>
   useSyncExternalStore(creatorFilterStore.subscribe, creatorFilterStore.get, () => serverValue);
+export const useAccessFilter = (serverValue: Access[]) =>
+  useSyncExternalStore(accessStore.subscribe, accessStore.get, () => serverValue);
 
 export const useSetUserFilter = () => {
   const router = useRouter();
@@ -137,6 +138,25 @@ export const useSetCreatorFilter = () => {
       query.delete('creator');
     } else {
       query.set('creator', creators.join(','));
+    }
+
+    router.push(`${pathname}?${query.toString()}`);
+  };
+};
+
+export const useSetAccessFilter = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  return (accesses: Access[]) => {
+    accessStore.set(accesses);
+
+    const query = new URLSearchParams(window.location.search);
+
+    if (accesses.length === 0) {
+      query.delete('access');
+    } else {
+      query.set('access', accesses.join(','));
     }
 
     router.push(`${pathname}?${query.toString()}`);
