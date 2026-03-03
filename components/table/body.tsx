@@ -3,6 +3,7 @@
 import { TableBody } from '@navikt/ds-react/Table';
 import { useEffect } from 'react';
 import {
+  useAccessFilter,
   useCaseStatusFilter,
   useCreatorFilter,
   useDocumentTypeFilter,
@@ -20,6 +21,7 @@ import {
 } from '@/components/table/open';
 import { Row } from '@/components/table/row';
 import type { ParsedRow } from '@/lib/data';
+import type { Access } from '@/lib/enums/access';
 import { ALL_USECASES } from '@/lib/enums/all';
 import type { CaseStatus } from '@/lib/enums/case-status';
 import type { CreatorEnum } from '@/lib/enums/creator';
@@ -37,6 +39,7 @@ interface Props {
   documentTypeServerFilter: DocumentTypeEnum[];
   parentServerFilter: ParentEnum[];
   creatorServerFilter: CreatorEnum[];
+  accessServerFilter: Access[];
 }
 
 export const Body = ({
@@ -46,12 +49,14 @@ export const Body = ({
   documentTypeServerFilter,
   parentServerFilter,
   creatorServerFilter,
+  accessServerFilter,
 }: Props) => {
   const usersFilter = useUserFilter(userServerFilter);
   const caseStatusFilter = useCaseStatusFilter(caseStatusServerFilter);
   const documentTypeFilter = useDocumentTypeFilter(documentTypeServerFilter);
   const parentFilter = useParentFilter(parentServerFilter);
   const creatorFilter = useCreatorFilter(creatorServerFilter);
+  const accessFilter = useAccessFilter(accessServerFilter);
 
   useEffect(() => {
     window.addEventListener('keydown', listener);
@@ -84,6 +89,12 @@ export const Body = ({
 
         const key = usecaseToKey(usecase);
         const row = rows.find((row) => matchUsecase(row.usecase, usecase));
+
+        const actions = Object.values(row?.actions ?? {});
+
+        if (accessFilter.length !== 0 && !accessFilter.some((access) => actions.includes(access))) {
+          return null;
+        }
 
         return <Row key={key} rowKey={key} usecase={usecase} row={row} rowNumber={index + 1} />;
       })}
