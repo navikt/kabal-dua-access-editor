@@ -7,15 +7,9 @@ import { UserEnum } from '@/lib/enums/user';
 const INVALID_CASE_STATUS_FOR_USER: Record<UserEnum, CaseStatus[]> = {
   [UserEnum.SAKSBEHANDLER]: [],
   [UserEnum.TILDELT_SAKSBEHANDLER]: [CaseStatus.LEDIG, CaseStatus.FULLFOERT],
-  [UserEnum.TILDELT_MEDUNDERSKRIVER]: [
-    CaseStatus.LEDIG,
-    CaseStatus.FULLFOERT,
-    CaseStatus.WITH_SAKSBEHANDLER,
-    CaseStatus.WITH_ROL,
-    CaseStatus.RETURNED_FROM_ROL,
-  ],
+  [UserEnum.TILDELT_MEDUNDERSKRIVER]: [CaseStatus.LEDIG, CaseStatus.FULLFOERT],
   [UserEnum.ROL]: [],
-  [UserEnum.TILDELT_ROL]: [CaseStatus.LEDIG, CaseStatus.FULLFOERT, CaseStatus.WITH_SAKSBEHANDLER, CaseStatus.WITH_MU],
+  [UserEnum.TILDELT_ROL]: [CaseStatus.LEDIG, CaseStatus.FULLFOERT],
 };
 
 const VALID_ATTACHMENT_DOCUMENT_TYPES: DocumentTypeEnum[] = [
@@ -31,6 +25,29 @@ const VALID_MAIN_DOCUMENT_TYPES: DocumentTypeEnum[] = [
 ];
 
 export const isValidCase = ({ user, caseStatus, documentType, parent }: RowUsecase): boolean => {
+  if (
+    user === UserEnum.TILDELT_MEDUNDERSKRIVER &&
+    (documentType === DocumentTypeEnum.JOURNALFOERT ||
+      documentType === DocumentTypeEnum.UPLOADED ||
+      documentType === DocumentTypeEnum.ROL_ANSWERS) &&
+    (caseStatus === CaseStatus.WITH_SAKSBEHANDLER ||
+      caseStatus === CaseStatus.WITH_ROL ||
+      caseStatus === CaseStatus.RETURNED_FROM_ROL)
+  ) {
+    return false;
+  }
+
+  if (
+    user === UserEnum.TILDELT_ROL &&
+    (documentType === DocumentTypeEnum.JOURNALFOERT ||
+      documentType === DocumentTypeEnum.UPLOADED ||
+      documentType === DocumentTypeEnum.ROL_QUESTIONS ||
+      documentType === DocumentTypeEnum.SMART_DOCUMENT) &&
+    (caseStatus === CaseStatus.WITH_SAKSBEHANDLER || caseStatus === CaseStatus.WITH_MU)
+  ) {
+    return false;
+  }
+
   if (INVALID_CASE_STATUS_FOR_USER[user].includes(caseStatus)) {
     return false;
   }
